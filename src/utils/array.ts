@@ -28,6 +28,42 @@ export async function asyncEach<T>(
 }
 
 /**
+ * Async Array.filter
+ * @param arr
+ * @param cb callback
+ * @returns {Promise<Array<T>>}
+ */
+export async function asyncFilter<T>(
+  arr: Array<T>,
+  cb: (item: T) => Promise<boolean>
+): Promise<Array<T>> {
+  const rtnAsyncArray: Array<T> = [];
+  await asyncEach(arr, async (item: T) => {
+    const cond: boolean = await cb(item);
+    if (cond) rtnAsyncArray.push(item);
+  });
+  return rtnAsyncArray;
+}
+
+/**
+ * Async Array.map
+ * @param arr
+ * @param cb
+ * @returns {Promise<Array<T>>}
+ */
+export async function asyncMap<T>(
+  arr: Array<T>,
+  cb: (item: T) => Promise<any>
+): Promise<Array<T>> {
+  const rtnAsyncArray: Array<T> = [];
+  await asyncEach(arr, async (item: T) => {
+    const cbResult: T = await cb(item);
+    rtnAsyncArray.push(cbResult);
+  });
+  return rtnAsyncArray;
+}
+
+/**
  * Create matched context
  * @param v
  * @returns {on, otherwise}
@@ -41,6 +77,14 @@ export function matched<T>(v: T) {
 
 /**
  * Create match context
+ *
+ * example
+ *
+ * match(0)
+ *  .on((x) => x < 0, () => 0)
+ *  .on((x) => x >= 0 && x < 1), () => 1)
+ *  .otherwise((x) => x * 10);
+ *
  * @param v
  * @returns {on, otherwise}
  */
