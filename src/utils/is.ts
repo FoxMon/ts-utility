@@ -26,10 +26,37 @@ export function isBoolean(target: unknown): boolean {
 }
 
 /**
+ * Check string
+ * @param target
+ * @returns {boolean}
+ */
+export function isString(target: unknown): boolean {
+  return typeof target === "string" ? true : false;
+}
+
+/**
  * Check undefined
  * @param target
  * @returns {boolean}
  */
 export function inUndefined(target: unknown): boolean {
   return target === "undefined";
+}
+
+/**
+ * Check null
+ * @param target
+ * @returns {boolean}
+ */
+export function isNull(target: unknown): boolean {
+  return target === null;
+}
+
+/**
+ * Check function
+ * @param target
+ * @returns {boolean}
+ */
+export function isFunction(target: unknown): boolean {
+  return typeof target === "function";
 }
