@@ -1,3 +1,4 @@
+import { isArray, isFunction } from "./is";
 import { Type } from "../types/type";
 
 /**
@@ -8,6 +9,21 @@ import { Type } from "../types/type";
  */
 export function removeDuplicate<T>(arr1: Array<T>, arr2: Array<T>): Array<T> {
   return arr1.filter((value: T, idx: number) => arr2.indexOf(value) === idx);
+}
+
+/**
+ *
+ * @param arr
+ * @returns {void}
+ */
+export function each<T>(arr: Array<T>, cb: (item: T) => any): void {
+  if (!isArray(arr) || !isFunction(cb)) return;
+  const indexes: Array<number> = Array.from({ length: arr.length })
+    .fill(0)
+    .map((_, idx: number) => idx);
+  for (const idx of indexes) {
+    cb(arr[idx]);
+  }
 }
 
 /**
