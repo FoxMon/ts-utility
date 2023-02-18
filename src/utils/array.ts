@@ -38,7 +38,7 @@ export function each<T>(
       }
     )
     .on(
-      () => isObject(target),
+      () => isObject(target) === true,
       () => {
         const object: Type.HashType<T> = target as Type.HashType<T>;
         Object.keys(object).forEach((key: string) => {
