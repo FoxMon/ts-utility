@@ -1,4 +1,4 @@
-import { isArray, isFunction } from "./is";
+import { isArray, isFunction, isObject } from "./is";
 import { Type } from "../types/type";
 
 /**
@@ -12,18 +12,41 @@ export function removeDuplicate<T>(arr1: Array<T>, arr2: Array<T>): Array<T> {
 }
 
 /**
- *
+ * Each function for array like Array.forEach function
+ * This function can be used to object or array
  * @param arr
  * @returns {void}
  */
-export function each<T>(arr: Array<T>, cb: (item: T) => any): void {
-  if (!isArray(arr) || !isFunction(cb)) return;
-  const indexes: Array<number> = Array.from({ length: arr.length })
-    .fill(0)
-    .map((_, idx: number) => idx);
-  for (const idx of indexes) {
-    cb(arr[idx]);
-  }
+export function each<T>(
+  target: Array<T> | Type.HashType<T>,
+  cb: (item: T) => any
+): void {
+  if (!isFunction(cb)) return;
+  match(target)
+    .on(
+      () => isArray(target) === true,
+      () => {
+        const arr: Array<T> = target as Array<T>;
+        const indexes: Array<number> = Array.from({
+          length: target.length as number,
+        })
+          .fill(0)
+          .map((_, idx: number) => idx);
+        for (const idx of indexes) {
+          cb(arr[idx]);
+        }
+      }
+    )
+    .on(
+      () => isObject(target),
+      () => {
+        const object: Type.HashType<T> = target as Type.HashType<T>;
+        Object.keys(object).forEach((key: string) => {
+          cb(object[key]);
+        });
+      }
+    )
+    .otherwise((target) => new Error(`The target is not iterable ${target}`));
 }
 
 /**
