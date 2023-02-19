@@ -15,11 +15,12 @@ export function removeDuplicate<T>(arr1: Array<T>, arr2: Array<T>): Array<T> {
  * Each function for array like Array.forEach function
  * This function can be used to object or array
  * @param arr
+ * @param {(item: T, key: (string | number))}
  * @returns {void}
  */
 export function each<T>(
   target: Array<T> | Type.HashType<T>,
-  cb: (item: T) => any
+  cb: (item: T, key: string | number) => any
 ): void {
   if (!isFunction(cb)) return;
   match(target)
@@ -27,7 +28,7 @@ export function each<T>(
       () => isArray(target) === true,
       () => {
         const arr: Array<T> = target as Array<T>;
-        arr.forEach((item: T) => cb(item));
+        arr.forEach((item: T, idx: number) => cb(item, idx));
       }
     )
     .on(
@@ -35,11 +36,30 @@ export function each<T>(
       () => {
         const object: Type.HashType<T> = target as Type.HashType<T>;
         Object.keys(object).forEach((key: string) => {
-          cb(object[key]);
+          cb(object[key], key);
         });
       }
     )
     .otherwise((target) => new Error(`The target is not iterable ${target}`));
+}
+
+/**
+ * Filter function for array like Array.filter function
+ * Filter function can be used to object or array
+ * @param target
+ * @param {(item: T, key: (string | number))}
+ * @returns {Array<T>}
+ */
+export function filter<T>(
+  target: Array<T> | Type.HashType<T>,
+  cb: (item: T, key: string | number) => any
+): Array<T> {
+  const rtnArray: Array<T> = [];
+  each(target, (item: T, key: string | number) => {
+    const condition: boolean = cb(item, key);
+    condition && rtnArray.push(item);
+  });
+  return rtnArray;
 }
 
 /**
