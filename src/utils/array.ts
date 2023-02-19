@@ -27,14 +27,7 @@ export function each<T>(
       () => isArray(target) === true,
       () => {
         const arr: Array<T> = target as Array<T>;
-        const indexes: Array<number> = Array.from({
-          length: target.length as number,
-        })
-          .fill(0)
-          .map((_, idx: number) => idx);
-        for (const idx of indexes) {
-          cb(arr[idx]);
-        }
+        arr.forEach((item: T) => cb(item));
       }
     )
     .on(
