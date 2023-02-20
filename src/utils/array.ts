@@ -63,6 +63,32 @@ export function filter<T>(
 }
 
 /**
+ * Keys function for object or array
+ * Like Object.keys() function
+ * @param target
+ * @returns {Array<string>}
+ */
+export function keys<T>(target: Array<T> | Type.HashType<T>): Array<string> {
+  if (isObject(target)) return Object.keys(target);
+  const array: Array<T> = target as Array<T>;
+  const rtnArray: Array<string> = array.map((_: T, idx: number) =>
+    idx.toString()
+  );
+  return rtnArray.length === 0 ? [] : rtnArray;
+}
+
+/**
+ * Values function for object or array
+ * Like Object.values() function
+ * @param target
+ * @returns {Array<T>}
+ */
+export function values<T>(target: Array<T> | Type.HashType<T>): Array<T> {
+  if (isArray(target)) return (target as Array<T>) || [];
+  return Object.values(target) || [];
+}
+
+/**
  * Async Array.forEach
  * @param arr
  * @param cb callback

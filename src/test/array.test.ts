@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { each, filter } from "../utils/array";
+import { each, filter, keys, values } from "../utils/array";
 import { Type } from "../types/type";
 
 describe("Test each function in array util", () => {
@@ -43,5 +43,23 @@ describe("Test each function in array util", () => {
       item % 2 === 0 && filteredArray.push({ [key]: item });
     });
     expect(filteredArray).toEqual([{ B: 2 }, { D: 4 }]);
+  });
+  it("Keys function test", () => {
+    const arr: Array<number> = [1, 2, 3, 4];
+    const res: Array<string> = keys(arr);
+    expect(res).toEqual(["0", "1", "2", "3"]);
+    const object = { A: "A", B: "B" };
+    const oRes = keys(object);
+    expect(oRes).toEqual(["A", "B"]);
+    expect(keys([])).toEqual([]);
+    expect(keys({})).toEqual([]);
+  });
+  it("Values function test", () => {
+    const arr: Array<number> = [1, 2, 3, 4];
+    expect(values(arr)).toEqual([1, 2, 3, 4]);
+    const object = { A: "a", B: "b" };
+    expect(values(object)).toEqual(["a", "b"]);
+    expect(values([])).toEqual([]);
+    expect(values({})).toEqual([]);
   });
 });
