@@ -2,7 +2,7 @@
  * Add year function
  * @param {Date} target
  * @param {number} value
- * @returns
+ * @returns {Date | null}
  */
 export function addYear<T extends Date | null>(target: T, value: number): T {
   if (!target) return null as T;
@@ -16,7 +16,7 @@ export function addYear<T extends Date | null>(target: T, value: number): T {
  * Add month function
  * @param {Date} target
  * @param {number} value
- * @returns
+ * @returns {Date | null}
  */
 export function addMonth<T extends Date | null>(target: T, value: number): T {
   if (!target) return null as T;
@@ -26,9 +26,10 @@ export function addMonth<T extends Date | null>(target: T, value: number): T {
 }
 
 /**
- *
+ * Add date function
  * @param {Date} target
  * @param {number} value
+ * @returns {Date | null}
  */
 export function addDate<T extends Date | null>(target: T, value: number): T {
   if (!target) return null as T;
