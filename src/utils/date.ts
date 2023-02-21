@@ -24,3 +24,15 @@ export function addMonth<T extends Date | null>(target: T, value: number): T {
   added.setMonth(added.getMonth() + value);
   return added as T;
 }
+
+/**
+ *
+ * @param {Date} target
+ * @param {number} value
+ */
+export function addDate<T extends Date | null>(target: T, value: number): T {
+  if (!target) return null as T;
+  const added = new Date(target.getTime());
+  added.setDate(added.getDate() + value);
+  return added as T;
+}
