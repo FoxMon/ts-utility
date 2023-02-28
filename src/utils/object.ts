@@ -28,3 +28,16 @@ export function deepClone(target: any) {
   }
   return clone;
 }
+
+/**
+ * Clear null or undefined field
+ * @param {T extends object} target
+ * @returns {T}
+ */
+export function clearNullable<T extends object>(target: T): T {
+  Object.keys(target).forEach((key: string) => {
+    // @ts-expect-error
+    if (!target[key]) delete target[key];
+  });
+  return target;
+}
