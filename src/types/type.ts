@@ -1,5 +1,9 @@
 /**
  * Types
+ *
+ * MatchType
+ * HashType
+ * NonNullable
  */
 export namespace Type {
   /**
@@ -17,4 +21,9 @@ export namespace Type {
   export interface HashType<T> {
     [key: string]: T;
   }
+
+  /**
+   * Non nullable type
+   */
+  export type NonNullable<T> = T extends null | undefined ? never : T;
 }
