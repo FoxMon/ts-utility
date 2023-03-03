@@ -6,6 +6,10 @@ Simple util function package
 npm i @foxmon/ts-util
 ```
 
+```typescript
+import util from "@foxmon/ts-util";
+```
+
 ## 1. Is
 
 Type check util
