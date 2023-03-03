@@ -7,7 +7,7 @@ npm i @foxmon/ts-util
 ```
 
 ```typescript
-import util from "@foxmon/ts-util";
+import { is, array } from "@foxmon/ts-util";
 ```
 
 ## 1. Is
@@ -22,7 +22,7 @@ Type check util
 
 ```typescript
 // true
-console.log(isArray([]));
+console.log(is.isArray([]));
 ```
 
 ## 2. Array
@@ -38,7 +38,7 @@ The each function can be used to object or array
 
 // Array version
 const array: number[] = [1, 2, 3, 4];
-each(array, (num: number) => {
+array.each(array, (num: number) => {
   console.log(num);
 });
 
