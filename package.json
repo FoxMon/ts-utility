@@ -3,7 +3,6 @@
   "version": "1.0.2",
   "description": "TypeScript util",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "vitest"
   },
@@ -19,6 +18,8 @@
   "homepage": "https://github.com/FoxMon/ts-utility#readme",
   "devDependencies": {
     "typescript": "^4.9.5",
+    "@types/node": "^18.11.18",
+    "tslib": "^2.5.0",
     "vitest": "^0.28.5"
   }
 }
