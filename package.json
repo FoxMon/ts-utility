@@ -1,6 +1,6 @@
 {
   "name": "@foxmon/ts-util",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "TypeScript util",
   "main": "src/utils/index.js",
   "scripts": {
