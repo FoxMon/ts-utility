@@ -7,10 +7,10 @@ npm i @foxmon/ts-util
 ```
 
 ```typescript
-import { is, array } from "@foxmon/ts-util";
+import tu from "@foxmon/ts-util";
 ```
 
-## 1. Is
+## 1. is
 
 Type check util
 
@@ -22,10 +22,10 @@ Type check util
 
 ```typescript
 // true
-console.log(is.isArray([]));
+console.log(tu.isArray([]));
 ```
 
-## 2. Array
+## 2. array
 
 Array util
 
@@ -38,7 +38,7 @@ The each function can be used to object or array
 
 // Array version
 const array: number[] = [1, 2, 3, 4];
-array.each(array, (num: number) => {
+tu.each(array, (num: number) => {
   console.log(num);
 });
 
@@ -47,8 +47,25 @@ const object = {
   A: "Data-A",
   B: "Data-B",
 };
-each(object, (item: string, key: string) => {
+tu.each(object, (item: string, key: string) => {
   console.log(`Value ${item}`);
   console.log(`Key ${key}`);
 });
+```
+
+## 3. object
+
+Object util
+
+Deep copy object
+
+```typescript
+const obj = {
+  a: {
+    b: 1,
+  },
+  c: 2,
+};
+
+const co = tu.deepClone(obj);
 ```
