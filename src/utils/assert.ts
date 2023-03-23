@@ -28,3 +28,23 @@ export function assertForDefined<T>(
     assertionError(`Expected "value" to be defined, but received ${value}`);
   }
 }
+
+/**
+ * Assert number
+ * @param {unknown} target
+ */
+export function assertForNumber(target: unknown): asserts target is number {
+  if (typeof target !== "number") {
+    assertionError("Not a number!");
+  }
+}
+
+/**
+ * Assert string
+ * @param {unknown} target
+ */
+export function assertForString(target: unknown): asserts target is string {
+  if (typeof target !== "string") {
+    assertionError("Not a string!");
+  }
+}
